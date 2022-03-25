@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
-import { timerInterval$, timer$ } from "../src/countdown"
-import { take } from 'rxjs/operators';
+import { countDown$, timer$ } from "../src/countdown"
 import { timeInSeconds } from "../src/constants";
 
 export default function Home() {
@@ -10,8 +9,7 @@ export default function Home() {
   useForceUpdate();
   
   useEffect(() => {
-    const countDown$ = timerInterval$.pipe(take(timeInSeconds));
-    timer$.subscribe(timeValue => { if (timeValue === 0) { setCountdown("Time's up!")} });
+    timer$.subscribe(() => { setCountdown("Time's up!")} );
     countDown$.subscribe(timeValue => setTimeout(timeInSeconds - timeValue - 1));
   }, []);
 
