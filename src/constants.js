@@ -1,0 +1,1 @@
+export const timeInSeconds = 300; // 5min, or 300s
